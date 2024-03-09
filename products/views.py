@@ -4,6 +4,7 @@ from django.core.paginator import Paginator
 # Create your views here.
 def index(request):
     return render(request,'index.html')
+
 def list_products(request):
 
     """
@@ -17,5 +18,8 @@ def list_products(request):
     product_list=product_paginator.get_page(page)
     context={'products':product_list}
     return render(request,'products.html',context)
-def detail_product(request):
-    return render(request,'product_detail.html')
+
+def detail_product(request,pk):
+    product=Product.objects.get(pk=pk)
+    context={'product':product}
+    return render(request,'product_detail.html',context)
