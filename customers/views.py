@@ -1,8 +1,11 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate,login
+from django.contrib.auth import authenticate,login,logout
 from . models import Customer
 from  django.contrib import messages
+def sign_out(request):
+    logout(request)
+    return redirect('home')
 # Create your views here.
 def show_account(request):
     if request.POST and 'register' in request.POST:
@@ -21,7 +24,7 @@ def show_account(request):
             )
             #create customer account
 
-            Customer.objects.create(
+            customer=Customer.objects.create(
                 user=user,
                 phone=phone,
                 address=address
@@ -32,6 +35,7 @@ def show_account(request):
         except Exception as e:
             error_message="Duplication or invalid input"
             messages.error(request,error_message)
+
     if request.POST and 'login' in request.POST:
         username=request.POST.get('username')
         password=request.POST.get('password')
