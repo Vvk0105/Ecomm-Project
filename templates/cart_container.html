@@ -1,4 +1,6 @@
 {% load static %}
+{% load mul %}
+{% load total %}
 
 <div class="small-container cart-page">
     {% if cart %}
@@ -22,23 +24,16 @@
                 </div>
             </td>
             <td><input type="number" disabled value="{{ cart_item.quantity }}"></td>
-            <td>{{ cart_item.product.price }}</td>
+            <td>Rs: {% mul cart_item.product.price cart_item.quantity %}</td>
         </tr>
         {% endfor %}
     </tbody></table>
     <div class="total-price">
         <table>
-            <tbody><tr>
-                <td>Subtotal</td>
-                <td>$200.00</td>
-            </tr>
-            <tr>
-                <td>Tax</td>
-                <td>$35.00</td>
-            </tr>
+            <tbody>
             <tr>
                 <td>Total</td>
-                <td>$230.00</td>
+                <td>Rs: {% total cart %}</td>
             </tr>
             <tr><td colspan="2"><button>Checkout</button></td></tr>
         </tbody></table>
