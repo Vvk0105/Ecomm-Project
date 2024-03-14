@@ -1,0 +1,13 @@
+{% extends 'blank_layout.html' %}
+
+{% block content %}
+{% if messages %}
+
+    {% for message in messages %}
+        {{ message }}
+    {% endfor %}
+
+{% else %}
+{% include 'orders_container.html'  %}
+{% endif %}
+{% endblock content %}
